@@ -4,8 +4,7 @@ const glob = require('glob');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
-const files = glob.sync('./[1-9]-*/*.js').map(pth => pth.replace('.js', ''));
-console.log(files)
+const files = glob.sync('./[1-9]-*/*.html').map(pth => pth.replace('.html', ''));
 
 const config = {
     mode: 'development',
@@ -25,13 +24,12 @@ const config = {
         // Copy files from source to destination for examples from before using webpack
         new CopyWebpackPlugin({
             patterns: [
+                { from: "index.html", to: "." },
                 { from: "./0-Day-1/*.js", to: "." },
+                { from: "./0-Day-1/*.html", to: "." },
                 { from: "./1-JS-Basics/*.css", to: "." },
             ],
         }),
-        new HtmlWebpackPlugin({template: './index.html'}),
-        new HtmlWebpackPlugin({template: './0-Day-1/first.html', filename: './0-Day-1/first.html'}),
-        new HtmlWebpackPlugin({template: './0-Day-1/first-solution.html', filename: './0-Day-1/first-solution.html'}),
         ...files.map(file => new HtmlWebpackPlugin({template: `./${file}.html`, filename: `./${file}.html`, chunks: [file]})),
     ],
     output: {
