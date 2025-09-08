@@ -1,4 +1,9 @@
 {
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack serve --mode development",
+    "start": "webpack serve --mode development --open"
+  },
   "dependencies": {
     "copy-webpack-plugin": "^10.2.2",
     "html-webpack-plugin": "^5.6.3",
@@ -6,6 +11,7 @@
     "three": "^0.179.1"
   },
   "devDependencies": {
+    "css-loader": "^6.8.1",
     "@eslint/js": "^9.33.0",
     "eslint": "^9.33.0",
     "eslint-config-prettier": "^10.1.8",
@@ -14,6 +20,7 @@
     "eslint-plugin-promise": "^7.2.1",
     "globals": "^16.3.0",
     "webpack": "^5.101.0",
-    "webpack-cli": "^6.0.1"
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^4.15.1"
   }
 }
