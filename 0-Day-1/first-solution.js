@@ -7,7 +7,7 @@
 
 // Import necessary libraries from CDNs
 // NOTE: In the future we will instead use npm and a build system to manage dependencies
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.142.0/build/three.module.js';
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.179.1/build/three.module.js';
 import Stats from 'https://cdn.jsdelivr.net/npm/stats.js@0.17.0/+esm';
 import { OrbitControls } from './OrbitControls.js';
 import GUI from 'https://cdn.jsdelivr.net/npm/lil-gui@0.20.0/+esm';
@@ -28,7 +28,7 @@ camera.position.set(-3, 2, 8);
 
 // Setup the renderer and attach to canvas
 const renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.outputEncoding = THREE.sRGBEncoding;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.VSMShadowMap;
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -72,7 +72,7 @@ cube.position.set(-1, 0, 0);
 cube.castShadow = true;
 scene.add(cube);
 
-const torusKnotGeometry = new THREE.TorusKnotBufferGeometry(0.5, 0.2, 100, 100);
+const torusKnotGeometry = new THREE.TorusKnotGeometry(0.5, 0.2, 100, 100);
 const torusKnotMat = new THREE.MeshStandardMaterial({ color: 0x00ff88, roughness: 0.1 });
 const torusKnotMesh = new THREE.Mesh(torusKnotGeometry, torusKnotMat);
 
@@ -81,7 +81,7 @@ torusKnotMesh.castShadow = true;
 scene.add(torusKnotMesh);
 
 // Create a very large ground plane
-const groundGeometry = new THREE.PlaneBufferGeometry(10000, 10000);
+const groundGeometry = new THREE.PlaneGeometry(10000, 10000);
 const groundMaterial = new THREE.MeshLambertMaterial({ color: 0xffffff });
 const groundMesh = new THREE.Mesh(groundGeometry, groundMaterial);
 groundMesh.position.set(0, -2, 0);
