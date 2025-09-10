@@ -56,7 +56,7 @@ const getPropertyHolder = (webGLRenderer) => {
   return holder;
 };
 
-export const intializeRendererControls = (gui, webGLRenderer) => {
+export const initializeRendererControls = (gui, webGLRenderer) => {
   const propertiesObject = getPropertyHolder(webGLRenderer);
   const rendererFolder = gui.addFolder("WebGLRenderer");
 

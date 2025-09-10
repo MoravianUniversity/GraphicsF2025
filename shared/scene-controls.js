@@ -40,7 +40,7 @@ export const initializeSceneControls = (gui, scene, fogEnabled, isOpen) => {
   const sceneControls = gui.addFolder('Scene')
 
   sceneControls
-    .add(props, 'background', ['White', 'Black', 'Null', 'Color', 'Texture', 'Cubemap'])
+    .add(props, 'background', ['White', 'Black', 'null', 'Color', 'Texture', 'Cubemap'])
     .onChange((event) => handleBackgroundChange(event, scene))
   sceneControls.add(props.overrideMaterial, 'toggle').name('Toggle Override Material')
   sceneControls.add(props.environment, 'toggle').name('Toggle Environment')
@@ -73,7 +73,7 @@ function handleBackgroundChange(setting, scene) {
   case 'Black':
     scene.background = new THREE.Color(0x000000)
     break
-  case 'Null':
+  case 'null':
     scene.background = null
     break
   case 'Color':
