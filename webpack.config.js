@@ -17,13 +17,18 @@ const config = {
             {
                 test: /\.css$/i,
                 use: ['style-loader', 'css-loader'],
-            }
+            },
+            {
+                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                type: 'asset/resource',
+            },
         ]
     },
     plugins: [
         // Copy files from source to destination for examples from before using webpack
         new CopyWebpackPlugin({
             patterns: [
+                { from: "favicon.*", to: "." },
                 { from: "index.html", to: "." },
                 { from: "./0-Day-1/*.js", to: "." },
                 { from: "./0-Day-1/*.html", to: "." },
