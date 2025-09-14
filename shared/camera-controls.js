@@ -3,16 +3,7 @@ import * as THREE from 'three'
 const perspectiveName = 'Perspective Camera'
 const orthoName = 'Orthographic Camera'
 
-// TODO: check the lookat
-const lookAtProps = () => ({
-  lookAtX: 0,
-  lookAtY: 0,
-  lookAtZ: 0
-})
-
 export const initializePerspectiveCameraControls = (camera, gui, orbitControls, isOpen) => {
-  const vectorProps = lookAtProps(camera)
-
   const props = {
     fov: camera.fov,
     aspect: camera.aspect,
@@ -25,15 +16,11 @@ export const initializePerspectiveCameraControls = (camera, gui, orbitControls, 
   removeIfPresent(gui, orthoName)
 
   const cameraFolder = gui.addFolder(perspectiveName)
-  cameraFolder.add(props, 'fov', 0, 180, 1)
-  cameraFolder.add(props, 'aspect', 0, 10, 0.1)
+  cameraFolder.add(props, 'fov', 25, 180, 1)
+  cameraFolder.add(props, 'aspect', 0.1, 10, 0.1)
   cameraFolder.add(props, 'near', 0, 20, 0.1)
   cameraFolder.add(props, 'far', 5, 100, 0.1)
   cameraFolder.add(props, 'zoom', -1, 10, 0.1)
-
-  cameraFolder.add(vectorProps, 'lookAtX', -10, 10, 0.1)
-  cameraFolder.add(vectorProps, 'lookAtY', -10, 10, 0.1)
-  cameraFolder.add(vectorProps, 'lookAtZ', -10, 10, 0.1)
 
   cameraFolder.onChange(() => {
     camera.fov = props.fov
@@ -41,11 +28,10 @@ export const initializePerspectiveCameraControls = (camera, gui, orbitControls, 
     camera.near = props.near
     camera.far = props.far
     camera.zoom = props.zoom
-
     camera.updateProjectionMatrix()
 
-    // since we're using a control, we also need to set that target
-    orbitControls.target.set(vectorProps.lookAtX, vectorProps.lookAtY, vectorProps.lookAtZ)
+    camera.lookAt(new THREE.Vector3(0, 0, 0))
+    orbitControls.target.set(0, 0, 0)
     orbitControls.update()
   })
 
@@ -53,8 +39,6 @@ export const initializePerspectiveCameraControls = (camera, gui, orbitControls, 
 }
 
 export const initializeOrthographicCameraControls = (camera, gui, orbitControls) => {
-  const vectorProps = lookAtProps(camera)
-
   const props = {
     left: camera.left,
     right: camera.right,
@@ -76,9 +60,6 @@ export const initializeOrthographicCameraControls = (camera, gui, orbitControls)
   cameraFolder.add(props, 'near', -20, 10, 1)
   cameraFolder.add(props, 'far', 1, 100, 1)
   cameraFolder.add(props, 'zoom', 1, 100, 1)
-  cameraFolder.add(vectorProps, 'lookAtX', -10, 10, 0.1)
-  cameraFolder.add(vectorProps, 'lookAtY', -10, 10, 0.1)
-  cameraFolder.add(vectorProps, 'lookAtZ', -10, 10, 0.1)
 
   cameraFolder.onChange(() => {
     camera.left = props.left
@@ -90,11 +71,8 @@ export const initializeOrthographicCameraControls = (camera, gui, orbitControls)
     camera.zoom = props.zoom
     camera.updateProjectionMatrix()
 
-    camera.lookAt(new THREE.Vector3(vectorProps.lookAtX, vectorProps.lookAtY, vectorProps.lookAtZ))
-
-    // since we're using a control, we also need to set that target
-    orbitControls.target.set(vectorProps.lookAtX, vectorProps.lookAtY, vectorProps.lookAtZ)
-
+    camera.lookAt(new THREE.Vector3(0, 0, 0))
+    orbitControls.target.set(0, 0, 0)
     orbitControls.update()
   })
 }

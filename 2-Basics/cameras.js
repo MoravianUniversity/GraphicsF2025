@@ -12,7 +12,7 @@ import {
 } from '../shared/camera-controls.js'
 import { stats } from '../shared/stats.js'
 
-const props = { backgroundColor: 0xffffff, fogColor: 0xffffff };
+const props = { backgroundColor: 0xffffff };
 const gui = new GUI();
 
 const addCubes = (scene) => {
@@ -70,8 +70,8 @@ initScene(props)(({ scene, camera, renderer }) => {
                 initializeOrthographicCameraControls(camera, gui, updatedOrbitControls);
                 updatedOrbitControls.update();
             } else {
-                camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
-                camera.position.set(-2, 2, 5);
+                camera = new THREE.PerspectiveCamera(75, 1, 0.1, 100);
+                camera.position.set(-8, 8, 8);
                 camera.updateProjectionMatrix();
                 this.perspective = 'Perspective';
                 updatedOrbitControls = initOrbitControls(camera, renderer);
