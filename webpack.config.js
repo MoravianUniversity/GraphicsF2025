@@ -22,6 +22,10 @@ const config = {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
                 type: 'asset/resource',
             },
+            {
+                test: /\.(stl|gltf|glb|bin|obj|mtl)$/i,
+                type: 'asset/resource',
+            },
         ]
     },
     plugins: [
@@ -45,6 +49,12 @@ const config = {
     devServer: {
         port: 8080,
         hot: true,
+        static: [
+            {
+                directory: path.join(__dirname, 'assets'),
+                publicPath: '/assets'
+            }
+        ]
     },
     resolve: {
         extensions: ['.js'],
