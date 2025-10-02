@@ -33,5 +33,23 @@ initScene(props)(({ scene, camera, renderer, orbitControls }) => {
     const black = new THREE.MeshBasicMaterial({ color: 0x000000 });
 
     // Create the smaller cubes
+    const cubes = [];
+    for (let x = -1; x <= 1; x++) {
+        for (let y = -1; y <= 1; y++) {
+            for (let z = -1; z <= 1; z++) {
+                const materials = [black, black, black, black, black, black];
+                if (x === 1) materials[0] = red;
+                if (x === -1) materials[1] = orange;
+                if (y === 1) materials[2] = yellow;
+                if (y === -1) materials[3] = green;
+                if (z === 1) materials[4] = blue;
+                if (z === -1) materials[5] = white;
 
+                const cubeMesh = new THREE.Mesh(cube, materials);
+                cubeMesh.position.set(x*1.05, y*1.05, z*1.05);
+                cubes.push(cubeMesh);
+                scene.add(cubeMesh);
+            }
+        }
+    }
 });
