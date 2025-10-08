@@ -297,7 +297,7 @@ function addRecurringMaterialProps(folder, data, material, mesh, disableEnv) {
     folder.add(data, 'map', diffuseMapKeys).onChange(updateTexture(material, 'map', diffuseMaps))
     folder.add(material, 'combine', constants.combine).onChange(updateCombine(material))
     if (material.reflectivity) folder.add(material, 'reflectivity', 0, 1)
-    folder.add(material, 'refractionRatio', 0, 1)
+    //folder.add(material, 'refractionRatio', 0, 1)
   }
 }
 
