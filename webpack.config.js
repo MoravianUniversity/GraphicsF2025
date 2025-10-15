@@ -26,6 +26,10 @@ const config = {
                 test: /\.(stl|gltf|glb|bin|obj|mtl)$/i,
                 type: 'asset/resource',
             },
+            {
+                test: /\.json$/,
+                type: 'asset/resource',
+            },
         ]
     },
     plugins: [
