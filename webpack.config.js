@@ -4,7 +4,9 @@ const glob = require('glob');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
-const files = glob.sync('./[1-9]-*/*.html').map(pth => pth.replace('.html', ''));
+const files = glob.sync('./[1-9]-*/*.html').map(pth => pth.replace('.html', '')).concat(
+    glob.sync('./1[0-9]-*/*.html').map(pth => pth.replace('.html', ''))
+);
 
 const config = {
     mode: 'development',
