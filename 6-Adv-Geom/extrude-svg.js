@@ -4,8 +4,6 @@ import { initScene } from '../shared/bootstrap'
 import { initializeRendererControls } from '../shared/renderer-control'
 import { initializeGuiMaterial, initializeGuiMeshStandardMaterial } from '../shared/material-controls'
 import { initializeSceneControls } from '../shared/scene-controls'
-//import { foreverPlane } from '../shared/floor'
-//import { initializeMeshVisibleControls } from '../shared/mesh-visible-controls'
 
 import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader'
 
@@ -21,9 +19,7 @@ const extrude_props = {
 }
 
 const p = new SVGLoader().loadAsync('/assets/svg/batman.svg')
-let shapes = [
-    new THREE.Shape().absarc(0, 0, 200, 0, Math.PI * 2, false)
-]
+let shapes = [new THREE.Shape().absarc(0, 0, 200, 0, Math.PI * 2, false)]
 
 const updateGeometry = ({
     curveSegments,
@@ -49,7 +45,7 @@ const updateGeometry = ({
 }
 
 p.then((svg) => {
-    //shapes = SVGLoader.createShapes(svg.paths[0])
+    shapes = SVGLoader.createShapes(svg.paths[0]);
     bootstrapGeometryScene({
         geometry: updateGeometry(extrude_props),
         provideGui: (gui, mesh) => {
@@ -93,14 +89,12 @@ function bootstrapGeometryScene({ geometry, provideGui, overrideMaterial, useLin
 
             animate();
 
-            //const plane = hidefloor ?? foreverPlane(scene);
             scene.add(mesh);
             initializeRendererControls(gui, renderer);
             initializeSceneControls(gui, scene, false);
 
             initializeGuiMaterial(gui, mesh, material).close();
             overrideMaterial ?? initializeGuiMeshStandardMaterial(gui, mesh, material).close();
-            //hidefloor ?? initializeMeshVisibleControls(gui, plane, 'Floor');
             provideGui(gui, mesh, scene);
         })
     }

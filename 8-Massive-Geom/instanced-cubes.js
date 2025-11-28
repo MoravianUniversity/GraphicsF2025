@@ -57,7 +57,7 @@ function sceneSetup() {
     controls.update();
 
     // Create the base objects
-    const mat = new THREE.MeshNormalMaterial({
+    const mat = new THREE.MeshPhongMaterial({
         blending: THREE.NormalBlending,
         opacity: 0.1,
         transparent: true,
@@ -99,6 +99,7 @@ function sceneSetup() {
         rotateX: 0,
         rotateY: 0,
         rotateZ: 0,
+        color: new THREE.Color(1, 0, 0),
     };
 
     // Create the GUI
@@ -142,6 +143,7 @@ function sceneSetup() {
     newCubeFolder.add(newCubeParams, 'rotateX', 0, Math.PI * 2);
     newCubeFolder.add(newCubeParams, 'rotateY', 0, Math.PI * 2);
     newCubeFolder.add(newCubeParams, 'rotateZ', 0, Math.PI * 2);
+    newCubeFolder.addColor(newCubeParams, 'color');
 
     // Group Control GUI
     const groupParams = {
@@ -204,8 +206,10 @@ function createCube(params) {
     matrix.scale(tempVec.set(params.scaleX, params.scaleY, params.scaleZ));
     matrix.multiply(tempRot.makeRotationFromEuler(tempEuler.set(params.rotateX, params.rotateY, params.rotateZ)));
     mesh.setMatrixAt(mesh.count, matrix);
+    mesh.setColorAt(mesh.count, params.color);
     mesh.count += 1;
     mesh.instanceMatrix.needsUpdate = true;
+    mesh.instanceColor.needsUpdate = true;
 }
 
 function growInstanceMesh(n) {

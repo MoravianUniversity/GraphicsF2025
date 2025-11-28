@@ -178,9 +178,10 @@ function createCubes(group, mat, n, params) {
     }
 }
 
+const geometry = new THREE.BoxGeometry(1, 1, 1);
+
 function createCube(mat, params) {
     const range = 20;
-    const geometry = new THREE.BoxGeometry(1, 1, 1);
     const mesh = new THREE.Mesh(geometry, mat);
     mesh.castShadow = true;
     mesh.receiveShadow = true;

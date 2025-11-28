@@ -64,7 +64,7 @@ function sceneSetup() {
     gui.add(params, 'bevelSegments', 1, 10, 1).onChange(updateText);
 
     // Load the font
-    // Find fonts at https://threejs.org/examples/fonts/
+    // Find fonts at https://fonts.google.com/
     // Convert fonts with https://gero3.github.io/facetype.js/
     const fontLoader = new FontLoader();
     fontLoader.loadAsync('/assets/fonts/helvetiker_regular.typeface.json').then(
